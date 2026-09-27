@@ -1,6 +1,7 @@
 # [UI UX Pro Max](https://uupm.cc)
 
 <p align="center">
+  <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.id.md">🇮🇩 Bahasa Indonesia</a> |
   <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.ko.md">🇰🇷 한국어</a> |
   <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.vi.md">🇻🇳 Tiếng Việt</a> |
   <a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.zh.md">🇨🇳 简体中文</a> |
@@ -37,8 +38,37 @@ An AI skill that provides design intelligence for building professional UI/UX ac
 
 <p align="center">
   <i>Other projects</i><br>
-  <a href="https://nextlevelbuilder.io">NextLevelBuilder.io</a> | <a href="https://goclaw.sh">GoClaw.sh</a> | <a href="https://claudekit.cc">ClaudeKit.cc</a> | <a href="https://tose.sh">TOSE.sh</a>
+  <a href="https://nextlevelbuilder.io">NextLevelBuilder.io</a> | <a href="https://goclaw.sh">GoClaw.sh</a> | <a href="https://agentkit.best">AgentKit.best</a> | <a href="https://tose.sh">TOSE.sh</a>
 </p>
+
+---
+
+<p align="center">
+  <span>Check Out Our New Skill:</span>
+  <br/>
+  <a href="https://github.com/viettranx/3dviz-pro-max" target="_blank">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.nextlevelbuilder.io/skills/3dviz/wordmark-dark.svg">
+      <img src="https://cdn.nextlevelbuilder.io/skills/3dviz/wordmark.svg" alt="3Dviz Pro Max" height="56">
+    </picture>
+  </a>
+</p>
+
+<p align="center"><b>Turn an idea into a 3D scene worth exploring.</b></p>
+
+<p align="center">
+  <img src="https://cdn.nextlevelbuilder.io/skills/3dviz/harness-village.gif" width="800" alt="Harness Village: a fantasy village with camera navigation and animated creatures">
+</p>
+
+<p align="center">
+  <sub><b>Visual inspiration, not a benchmark.</b> An author-supplied project recorded <i>before</i> this skill existed; its UI contains Vietnamese. Historical footage, not an English demo or a runtime test of the skill — see <a href="https://github.com/viettranx/3dviz-pro-max/blob/main/docs/demos/README.md">media provenance</a>.</sub>
+</p>
+
+<p align="center">
+  🤌 Website: <a href="https://3dviz.dev/" target="_blank">https://3dviz.dev/</a>
+</p>
+
+---
 
 ## What's New in v2.0
 
@@ -258,7 +288,7 @@ uipro init --ai kilocode    # KiloCode
 uipro init --ai warp        # Warp
 uipro init --ai augment     # Augment
 uipro init --ai codewhale   # CodeWhale
-uipro init --ai openclaw    # OpenClaw
+uipro init --ai zcode       # ZCode
 uipro init --ai universal   # Universal / Agent Standard (.agents/skills/)
 uipro init --ai all         # All assistants
 ```
@@ -270,6 +300,7 @@ The npm package is `ui-ux-pro-max-cli`; it still installs the `uipro` command. O
 ```bash
 uipro init --ai claude --global   # Install to ~/.claude/skills/
 uipro init --ai cursor --global   # Install to ~/.cursor/skills/
+uipro init --ai zcode --global    # Install to ~/.zcode/skills/
 uipro init --ai universal --global # Install to ~/.agents/skills/
 ```
 
@@ -280,6 +311,7 @@ uipro versions              # List available versions
 uipro update                # Refresh skill files from installed CLI package
 uipro update --global       # Refresh global skill files from installed CLI package
 uipro init --offline        # Compatibility flag; installs bundled templates
+uipro init --dry-run        # Preview install actions without writing files
 uipro uninstall             # Remove skill (auto-detect platform)
 uipro uninstall --ai claude # Remove specific platform
 uipro uninstall --global    # Remove from global install
@@ -301,7 +333,7 @@ If it is missing, install it yourself from [python.org](https://www.python.org/d
 
 ### Skill Mode (Auto-activate)
 
-**Supported:** Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale
+**Supported:** Claude Code, Cursor, Windsurf, Antigravity, Codex CLI, Continue, Gemini CLI, OpenCode, Qoder, CodeBuddy, Droid (Factory), KiloCode, Warp, Augment, CodeWhale, ZCode
 
 The skill activates automatically when you request UI/UX work. Just chat naturally:
 
@@ -366,7 +398,7 @@ Just mention your preferred stack in the prompt, or let it default to HTML + Tai
 
 For direct access to the design system generator:
 
-> Note: If you installed via Continue, replace `.claude/skills/` with `.continue/skills/` in the commands below. For Droid (Factory), use `.factory/skills/`.
+> Note: If you installed via Continue, replace `.claude/skills/` with `.continue/skills/` in the commands below. For Droid (Factory), use `.factory/skills/`. For ZCode, use `.zcode/skills/`.
 
 ```bash
 # Generate design system with ASCII output
@@ -406,7 +438,7 @@ results instead of mixing framework generations.
 Save your design system to files for **hierarchical retrieval across sessions**:
 
 ```bash
-# Generate and persist to design-system/MASTER.md
+# Generate and persist to design-system/myapp/MASTER.md
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "SaaS dashboard" --design-system --persist -p "MyApp"
 
 # Also create a page-specific override file
@@ -417,20 +449,21 @@ This creates a `design-system/` folder structure:
 
 ```
 design-system/
-├── MASTER.md           # Global Source of Truth (colors, typography, spacing, components)
-└── pages/
-    └── dashboard.md    # Page-specific overrides (only deviations from Master)
+└── myapp/                  # One folder per project (slug of -p "MyApp")
+    ├── MASTER.md           # Global Source of Truth (colors, typography, spacing, components)
+    └── pages/
+        └── dashboard.md    # Page-specific overrides (only deviations from Master)
 ```
 
 **How hierarchical retrieval works:**
-1. When building a specific page (e.g., "Checkout"), first check `design-system/pages/checkout.md`
+1. When building a specific page (e.g., "Checkout"), first check `design-system/[project-slug]/pages/checkout.md`
 2. If the page file exists, its rules **override** the Master file
-3. If not, use `design-system/MASTER.md` exclusively
+3. If not, use `design-system/[project-slug]/MASTER.md` exclusively
 
 **Context-aware retrieval prompt:**
 ```
-I am building the [Page Name] page. Please read design-system/MASTER.md.
-Also check if design-system/pages/[page-name].md exists.
+I am building the [Page Name] page. Please read design-system/[project-slug]/MASTER.md.
+Also check if design-system/[project-slug]/pages/[page-name].md exists.
 If the page file exists, prioritize its rules.
 If not, use the Master rules exclusively.
 Now, generate the code...
@@ -482,6 +515,7 @@ npm run typecheck
 # `npm run build` uses Bun when available and falls back to TypeScript compiler output after `npm ci`.
 npm run build
 node dist/index.js init --ai claude --offline  # Test in a temp folder
+node dist/index.js init --ai claude --dry-run  # Preview install actions (no writes)
 
 # 6. Create PR (never push directly to main)
 git checkout -b feat/your-feature
@@ -573,6 +607,26 @@ Use these commit types for correct version bumps:
 The release workflow uses the default `GITHUB_TOKEN` for GitHub releases and the repository `NPM_TOKEN` secret to publish `ui-ux-pro-max-cli` to npm.
 
 ## Troubleshooting
+
+### Claude Code reports `response exceeded the ... output token maximum`
+
+This is a limit on a single Claude Code response, not an error in the UI/UX Pro Max installer or search scripts. First, ask Claude to split the task into smaller steps and write large results to files incrementally.
+
+If you genuinely need a larger single response and the active model supports it, set Claude Code's output-token limit before starting a new session. For example:
+
+```bash
+# macOS, Linux, or WSL
+export CLAUDE_CODE_MAX_OUTPUT_TOKENS="64000"
+claude
+```
+
+```powershell
+# Windows PowerShell
+$env:CLAUDE_CODE_MAX_OUTPUT_TOKENS = "64000"
+claude
+```
+
+Shell environment changes only apply to programs launched from that shell, so restart Claude Code after setting the variable. Claude Code clamps values above the active model's output limit; model and provider caps vary. Increasing this value can also increase latency and usage, and reduces the effective context available before auto-compaction. See the official [Claude Code environment-variable reference](https://code.claude.com/docs/en/env-vars#variables).
 
 ### `uipro: unknown command 'uninstall'` or `unknown command 'update'`
 
